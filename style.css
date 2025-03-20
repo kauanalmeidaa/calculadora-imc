@@ -68,3 +68,17 @@ button:hover {
     text-align: center;
     width: 100%;
 }
+.footer p{
+    font-size: 15px;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+
+.footer a:hover {
+    color: #ff9800;
+    transition: 0.3s ease-in-out;
+}
