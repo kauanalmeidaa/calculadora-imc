@@ -1,32 +1,42 @@
 // Função para calcular o IMC
 function calcularIMC() {
-    let peso = document.getElementById("peso").value;
-    let altura = document.getElementById("altura").value;
+    let peso = parseFloat(document.getElementById("peso").value);
+    let altura = parseFloat(document.getElementById("altura").value);
     
-    // Verifica se os campos estão preenchidos
-    if (peso === "" || altura === "") {
+    if (!peso || !altura) {
         document.getElementById("resultado").innerHTML = "Por favor, preencha todos os campos.";
         return;
     }
 
-    // Cálculo do IMC e formatação para duas casas decimais
     let imc = (peso / (altura * altura)).toFixed(2);
     let classificacao = "";
     
     // Classificação do IMC
     if (imc < 18.5) {
         classificacao = "Abaixo do peso";
-    } else if (imc < 24.9) {
+        destacarLinha("baixo-peso");
+    } else if (imc < 25) {
         classificacao = "Peso normal";
-    } else if (imc < 29.9) {
+        destacarLinha("peso-normal");
+    } else if (imc < 30) {
         classificacao = "Sobrepeso";
+        destacarLinha("sobrepeso");
     } else {
         classificacao = "Obesidade";
+        destacarLinha("obesidade");
     }
     
     // Exibição do resultado
     document.getElementById("resultado").innerHTML = `Seu IMC é ${imc} (${classificacao}).`;
-    document.activeElement.blur();  // Remove o foco do input
+}
+
+// Função para destacar a linha correspondente
+function destacarLinha(id) {
+    // Remove o destaque anterior
+    document.querySelectorAll("tr").forEach(row => row.classList.remove("destacado"));
+
+    // Adiciona a classe de destaque na linha correspondente
+    document.getElementById(id).classList.add("destacado");
 }
 
 // Evento para calcular o IMC ao pressionar a tecla Enter
